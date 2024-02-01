@@ -11,7 +11,8 @@ class AddProductForm extends StatefulWidget {
   _AddProductFormState createState() => _AddProductFormState();
 }
 
-class _AddProductFormState extends State<AddProductForm> {
+class _AddProductFormState extends State<AddProductForm>
+    with SingleTickerProviderStateMixin {
   TextEditingController barcodeController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController dpController = TextEditingController();
@@ -27,8 +28,7 @@ class _AddProductFormState extends State<AddProductForm> {
 
   List<TextEditingController> typeControllers = [TextEditingController()];
 
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
+  TabController? _tabController;
 
   final List<String> items = [
     'Basic Groceries',
@@ -46,15 +46,27 @@ class _AddProductFormState extends State<AddProductForm> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Form'),
         centerTitle: true,
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(text: 'Information'),
+            Tab(text: 'Prices'),
+          ],
+        ),
       ),
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
+      body: TabBarView(
+        controller: _tabController,
         children: [
           // Page 1: Existing form for measurements and flavors
           Container(
@@ -450,29 +462,6 @@ class _AddProductFormState extends State<AddProductForm> {
           // Page 2: Page for setting prices
           _buildPriceSettingPage(),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.navigate_before),
-            label: 'Back',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.navigate_next),
-            label: 'Next',
-          ),
-        ],
-        currentIndex: _currentPage,
-        onTap: (index) {
-          setState(() {
-            _currentPage = index;
-            _pageController.animateToPage(
-              _currentPage,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-            );
-          });
-        },
       ),
     );
   }

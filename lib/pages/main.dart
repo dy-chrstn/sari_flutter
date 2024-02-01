@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sari/pages/login.dart';
 import 'package:sari/pages/product_details.dart';
 import 'add_product_form.dart';
+import 'restock.dart';
+import 'settings.dart';
+import 'scanner.dart';
+import 'analytics.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Login());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,9 +19,131 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      home: const BottomNavBar(),
+      theme: ThemeData(
+          textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+//bottom nav bar
+class BottomNavBar extends StatelessWidget {
+  const BottomNavBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> buildScreens() {
+      return [
+        const HomePage(),
+        const Analytics(),
+        const Scanner(),
+        Restock(),
+        const Settings(),
+      ];
+    }
+
+    List<PersistentBottomNavBarItem> navBarsItems() {
+      return [
+        PersistentBottomNavBarItem(
+          icon: SvgPicture.asset('lib/assets/home.svg'),
+          inactiveIcon: SvgPicture.asset(
+            'lib/assets/home.svg',
+            color: const Color(0xFF557793),
+          ),
+          title: ("Home"),
+          activeColorPrimary: const Color(0xFF1D3F58),
+          inactiveColorPrimary: const Color(0xFF557793),
+          activeColorSecondary: Colors.white,
+        ),
+        PersistentBottomNavBarItem(
+          icon: SvgPicture.asset(
+            'lib/assets/analytics.svg',
+          ),
+          inactiveIcon: SvgPicture.asset(
+            'lib/assets/analytics.svg',
+            color: const Color(0xFF557793),
+          ),
+          title: ("Analytics"),
+          activeColorPrimary: const Color(0xFF1D3F58),
+          inactiveColorPrimary: const Color(0xFF557793),
+          activeColorSecondary: Colors.white,
+        ),
+        PersistentBottomNavBarItem(
+          icon: SvgPicture.asset(
+            'lib/assets/scanner.svg',
+          ),
+          inactiveIcon: SvgPicture.asset(
+            'lib/assets/scanner.svg',
+            color: const Color(0xFF557793),
+          ),
+          title: ("Scanner"),
+          activeColorPrimary: const Color(0xFF1D3F58),
+          inactiveColorPrimary: const Color(0xFF557793),
+          activeColorSecondary: Colors.white,
+        ),
+        PersistentBottomNavBarItem(
+          icon: SvgPicture.asset('lib/assets/restock.svg'),
+          inactiveIcon: SvgPicture.asset(
+            'lib/assets/restock.svg',
+            color: const Color(0xFF557793),
+          ),
+          title: ("Restock"),
+          activeColorPrimary: const Color(0xFF1D3F58),
+          inactiveColorPrimary: const Color(0xFF557793),
+          activeColorSecondary: Colors.white,
+        ),
+        PersistentBottomNavBarItem(
+          icon: SvgPicture.asset('lib/assets/settings.svg'),
+          inactiveIcon: SvgPicture.asset(
+            'lib/assets/settings.svg',
+            color: const Color(0xFF557793),
+          ),
+          title: ('Settings'),
+          activeColorPrimary: const Color(0xFF1D3F58),
+          inactiveColorPrimary: const Color(0xFF557793),
+          activeColorSecondary: Colors.white,
+        ),
+      ];
+    }
+
+    PersistentTabController controller;
+
+    controller = PersistentTabController(initialIndex: 0);
+
+    return PersistentTabView(
+      context,
+      controller: controller,
+      screens: buildScreens(),
+      items: navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows:
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: const Color(0xFFEEF3F9),
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: const ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle:
+          NavBarStyle.style10, // Choose the nav bar style with this property.
     );
   }
 }
@@ -152,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProductDetails(),
+                            builder: (context) => const ProductDetails(),
                           ),
                         );
                       },

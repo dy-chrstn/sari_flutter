@@ -42,6 +42,11 @@ dependencies:
   drop_down_list: ^0.0.6
   dropdown_search: ^5.0.6
   flutter_svg: ^2.0.9
+  shared_preferences: ^2.2.2
+  google_fonts: ^6.1.0
+  persistent_bottom_nav_bar: ^5.0.2
+  settings_ui: ^2.0.2
+  group_list_view: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +69,12 @@ flutter:
     - lib/assets/century.png
     - lib/assets/lucky_me.png
     - lib/assets/question_mark.svg
+    - lib/assets/Sari-Logo.svg
+    - lib/assets/analytics.svg
+    - lib/assets/restock.svg
+    - lib/assets/home.svg
+    - lib/assets/scanner.svg
+    - lib/assets/settings.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
