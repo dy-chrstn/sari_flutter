@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'restock_add.dart';
 import 'package:group_list_view/group_list_view.dart';
 
 class Restock extends StatelessWidget {
@@ -91,10 +92,10 @@ class Restock extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 24.0, right: 8.0),
         child: FloatingActionButton(
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const AddProductForm()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  RestockAdd(onChanged: (bool ) {  },)),
+            );
           },
           backgroundColor: const Color(0xFF1D3F58),
           child: const Icon(

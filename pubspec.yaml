@@ -47,6 +47,14 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   settings_ui: ^2.0.2
   group_list_view: ^1.1.1
+  expansion_tile_card: ^3.0.0
+  expansion_tile_group: ^1.2.4
+  dropdown_button2: ^2.3.9
+  wolt_modal_sheet: ^0.4.0
+  bottom_sheet: ^4.0.0
+  dropdown_textfield: ^1.0.8
+  counter_button: ^1.0.1
+  logger: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:
