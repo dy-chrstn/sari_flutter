@@ -94,7 +94,11 @@ class Restock extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>  RestockAdd(onChanged: (bool ) {  },)),
+              MaterialPageRoute(
+                  builder: (context) => RestockAdd(
+                        initialPriceList: [],
+                        onChanged: (bool) {},
+                      )),
             );
           },
           backgroundColor: const Color(0xFF1D3F58),
