@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sari/pages/login.dart';
 import 'package:sari/pages/product_details.dart';
 import 'add_product_form.dart';
-import 'restock.dart';
+import 'record.dart';
 import 'settings.dart';
 import 'scanner.dart';
 import 'analytics.dart';
@@ -39,7 +39,7 @@ class BottomNavBar extends StatelessWidget {
         const HomePage(),
         const Analytics(),
         const Scanner(),
-        Restock(),
+        Record(),
         const Settings(),
       ];
     }
@@ -84,12 +84,12 @@ class BottomNavBar extends StatelessWidget {
           activeColorSecondary: Colors.white,
         ),
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset('lib/assets/restock.svg'),
+          icon: SvgPicture.asset('lib/assets/record.svg'),
           inactiveIcon: SvgPicture.asset(
-            'lib/assets/restock.svg',
+            'lib/assets/record.svg',
             color: const Color(0xFF557793),
           ),
-          title: ("Restock"),
+          title: ("Reccord"),
           activeColorPrimary: const Color(0xFF1D3F58),
           inactiveColorPrimary: const Color(0xFF557793),
           activeColorSecondary: Colors.white,

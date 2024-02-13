@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'main.dart';
-import 'restock_add_list.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:counter_button/counter_button.dart';
 
@@ -24,7 +22,6 @@ class _RestockAddState extends State<RestockAdd> {
   double totalPrice = 0.0;
   var logger = Logger();
 
-  var result;
   bool isChecked = false;
   String selectedValue = "Default Option";
 
@@ -69,12 +66,15 @@ class _RestockAddState extends State<RestockAdd> {
                   const TextField(
                     decoration: InputDecoration.collapsed(
                       hintText: "Title",
-                      hintStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                      hintStyle:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
                       focusColor: Colors.blue,
                     ),
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -140,6 +140,7 @@ class _RestockAddState extends State<RestockAdd> {
             setState(() {
               // _updatePriceInList(index.toDouble(), 0.00);
             });
+            // widget.initialPriceList.add(0);
             widget.initialPriceList.add(0);
           },
           backgroundColor: const Color(0xFF1D3F58),
@@ -172,27 +173,19 @@ class RowWidget extends StatefulWidget {
 }
 
 class _RowWidgetState extends State<RowWidget> {
-  bool isChecked = false;
-  var selectedValue = "Default Item";
+  bool isChecked = false, toMinimize = false;
   // Focus Nodes
-  FocusNode searchFocusNode = FocusNode();
-  FocusNode textFieldFocusNode = FocusNode();
+  FocusNode searchFocusNode = FocusNode(), textFieldFocusNode = FocusNode();
   // Scroll Controller
   ScrollController scrollController = ScrollController();
   // Variables
-  String toConcat = '';
-  String finalConcat = '';
-  var logger = Logger();
+  String toConcat = '', finalConcat = '';
+  var logger = Logger(), selectedValue = "Default Item";
   var _initialPrice = 0.0, _valueSelected = 0.0, _price = '0.00';
+  int _defaultValue = 1;
   int? _typeValue, _sizeValue;
   late int typeIndex = 0, sizeIndex = 0, _counterValue = 1;
-  int _defaultValue = 1;
-  final double _currentPrice = 0.0;
   double quantity = 1;
-  final double _quantity = 1; // Initialize with a default quantity
-
-  bool toMinimize = false;
-// Lists
   List<String> itemList = ["Item 1"];
   final List<String> size = ['95g', '125g', '155g', '180g', '420g'];
   final List<String> type = ['Flakes in Oil', 'Hot & Spicy', 'Corned Tuna'];
@@ -201,9 +194,7 @@ class _RowWidgetState extends State<RowWidget> {
   @override
   void initState() {
     super.initState();
-    // _currentPrice = widget.initialPrice; // Initialize with initial price
-    // _sizeValue = 0; // Set initial selected index (adjust if different)
-    calculatePrice(defaultChip[0]); // Call with initially selected size
+    calculatePrice(defaultChip[0]);
     _initialPrice = quantity * _valueSelected;
     // _initialPrice = _quantity * widget.initialPrice;
     // toMinimize = false;
@@ -212,12 +203,6 @@ class _RowWidgetState extends State<RowWidget> {
   void mutiplyQuantity(double quantity) {
     setState(() {
       _initialPrice = quantity * _valueSelected;
-    });
-  }
-
-  void concatText(String details) {
-    setState(() {
-      finalConcat += details;
     });
   }
 
