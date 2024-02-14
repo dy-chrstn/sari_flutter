@@ -21,7 +21,6 @@ class Note extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
               itemCount: cards.length,
-              
               itemBuilder: (context, index) => buildCard(cards[index]),
             ),
           ),

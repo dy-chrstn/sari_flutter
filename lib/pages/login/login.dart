@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sari/pages/main.dart';
-import 'package:sari/pages/signup.dart';
-import 'package:sari/pages/correction.dart';
+import 'package:sari/pages/login/signup.dart';
+import 'package:sari/pages/login/create_profile.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -138,11 +139,10 @@ class _LoginFormState extends State<LoginForm> {
           child: ElevatedButton(
             onPressed: () {
               bool isLoginSuccessful = true;
-
             if (isLoginSuccessful) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const MyApp()),
+                MaterialPageRoute(builder: (context) => CreateProfile()),
                 //MaterialPageRoute(builder: (context) => const Correction()),
               );
             } 
