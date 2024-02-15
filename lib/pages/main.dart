@@ -9,6 +9,7 @@ import 'settings.dart';
 import 'scanner.dart';
 import 'analytics.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
 void main() {
   runApp(const Login());
@@ -39,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
         const HomePage(),
         const Analytics(),
         const Scanner(),
-        Record(),
+        const Record(),
         const Settings(),
       ];
     }
@@ -156,26 +157,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _value = '';
-
-  // Sample categories
-  final List<String> categories = [
-    'Basic Groceries',
-    'Beverages',
-    'Bread and Pastries',
-    'Canned Goods',
-    'Cigarettes',
-    'Laundry Detergent',
-    'Condiments'
-        'Household Essentials',
-    'Ice Candy and Frozen Treats',
-    'Noodles',
-    'Mobile Phone Load and Credits',
-    'Personal Care Items',
-    'School Supplies',
-    'Snacks',
-  ];
-
+  final GlobalKey<SliderDrawerState> _sliderDrawerKey =
+      GlobalKey<SliderDrawerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,65 +181,29 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //title categories
-              const Padding(
-                padding: EdgeInsets.only(left: 20, top: 20),
-                child: Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Color(0xFF1D3F58),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 5),
-              SizedBox(
-                height: 55,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ChoiceChip(
-                        label: Text(categories[index]),
-                        selected: _value == categories[index],
-                        onSelected: (bool selected) {
-                          setState(() {
-                            _value = selected ? categories[index] : '';
-                          });
-                        },
-                        backgroundColor: const Color(0xFFEEF3F9),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        elevation: 2,
-                        shadowColor: Colors.grey,
-                        side: BorderSide.none,
-                        checkmarkColor: const Color(0xFFEEF3F9),
-                        selectedColor: const Color(0xFF001B2E),
-                        labelStyle: TextStyle(
-                          color: _value == categories[index]
-                              ? const Color(0xFFEEF3F9)
-                              : Colors.black,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
               const SizedBox(
-                height: 15,
+                height: 8,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  'Products',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Color(0xFF1D3F58),
-                    fontWeight: FontWeight.bold,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Products',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Color(0xFF1D3F58),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.filter_alt,
+                          color: Color(0xFF1D3F58),
+                        ))
+                  ],
                 ),
               ),
               const SizedBox(
@@ -336,7 +283,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              
+
               const SizedBox(
                 height: 25,
               )
