@@ -40,56 +40,59 @@ class Note extends StatelessWidget {
     );
   }
 
-  Card buildCard(CardData cardData) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Colors.white,
-      child: Row(
-        children: [
-          const SizedBox(
-            width: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  cardData.title,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1D3F58)),
-                ),
-                SizedBox(
-                  width: 240,
-                  child: Text(
-                    cardData.description,
-                    style: const TextStyle(color: Color.fromARGB(255, 41, 81, 110)),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      DateFormat.yMd().format(cardData.date),
-                      style: const TextStyle(fontSize: 14, color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      width: 200,
-                    ),
-                    SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.delete, color: Color(0xFF1D3F58),)))
-                  ],
-                ),
-              ],
+  SizedBox buildCard(CardData cardData) {
+    return SizedBox(
+      width: 250,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: Colors.white,
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 30,
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    cardData.title,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1D3F58)),
+                  ),
+                  SizedBox(
+                    width: 240,
+                    child: Text(
+                      cardData.description,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 41, 81, 110)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                   Row(
+                    children: [
+                      Text(
+                        DateFormat.yMd().format(cardData.date),
+                        style:
+                            const TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                      const SizedBox(width: 120,),
+                      const Text(
+                        'Last edited by: Christian',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

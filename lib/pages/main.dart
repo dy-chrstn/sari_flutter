@@ -9,7 +9,6 @@ import 'settings.dart';
 import 'scanner.dart';
 import 'analytics.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
 void main() {
   runApp(const Login());
@@ -157,14 +156,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<SliderDrawerState> _sliderDrawerKey =
-      GlobalKey<SliderDrawerState>();
+  List<String> categories = [
+    'Canned Goods',
+    'Beverages',
+    'Drinks',
+    'Soap',
+    'Powder'
+  ];
+
+  String? selectedCategory = '';
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
-        centerTitle: true,
+        title: const Text('Home'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -175,6 +182,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      endDrawer: _buildDrawer(categories),
+      key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Container(
           color: const Color(0xFFB3CDE4),
@@ -198,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const Spacer(),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
                         icon: const Icon(
                           Icons.filter_alt,
                           color: Color(0xFF1D3F58),
@@ -305,6 +314,31 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
+  }
+
+  Drawer _buildDrawer(List<String> categories) {
+    return Drawer(
+      child: ListView.builder(
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+            child: ChoiceChip(
+              label: Text(categories[index]),
+              selected: selectedCategory == categories[index],
+              onSelected: (value) {
+                setState(() {
+                  selectedCategory = value ? categories[index] : null;
+                });
+                Navigator.pop(context);
+                // Handle category selection (e.g., navigate to new page)
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

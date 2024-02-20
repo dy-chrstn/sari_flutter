@@ -2,12 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sari/dbHelper/mongodb.dart';
 import 'package:sari/pages/main.dart';
 import 'package:sari/pages/login/signup.dart';
 import 'package:sari/pages/login/create_profile.dart';
 
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
+  runApp(const MyApp());
+}
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -29,13 +34,14 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         color: const Color(0xFFB3CDE4),
         child: const Padding(
           padding: EdgeInsets.only(top: 16, bottom: 16, left: 24, right: 24),
           child: LoginForm(),
         ),
-      ),
+      ), 
     );
   }
 }
@@ -142,7 +148,7 @@ class _LoginFormState extends State<LoginForm> {
             if (isLoginSuccessful) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => CreateProfile()),
+                MaterialPageRoute(builder: (context) => const CreateProfile()),
                 //MaterialPageRoute(builder: (context) => const Correction()),
               );
             } 

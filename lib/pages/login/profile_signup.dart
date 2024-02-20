@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:logger/logger.dart';
 
 class ProfileSignup extends StatefulWidget {
   final TextEditingController controller;
 
-  ProfileSignup({super.key, required this.controller});
+  const ProfileSignup({super.key, required this.controller});
 
   @override
   State<ProfileSignup> createState() => _ProfileSignupState();
@@ -18,6 +17,7 @@ class _ProfileSignupState extends State<ProfileSignup> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           color: const Color(0xFFB3CDE4),
           child: Padding(

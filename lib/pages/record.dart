@@ -48,7 +48,7 @@ class _RecordState extends State<Record> with TickerProviderStateMixin {
         ),
         body: TabBarView(
           controller: _tabController,
-          children: [Restock(), Note()],
+          children: [const Restock(), Note()],
         ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(bottom: 24.0, right: 8.0),
@@ -59,7 +59,7 @@ class _RecordState extends State<Record> with TickerProviderStateMixin {
                   context,
                   MaterialPageRoute(
                     builder: (context) => RestockAdd(
-                      initialPriceList: [],
+                      initialPriceList: const [],
                       onChanged: (bool) {},
                     ),
                   ),
@@ -68,7 +68,7 @@ class _RecordState extends State<Record> with TickerProviderStateMixin {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NoteAdd()
+                    builder: (context) => const NoteAdd()
                   ),
                 );
               }
